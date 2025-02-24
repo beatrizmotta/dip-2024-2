@@ -12,8 +12,22 @@ def get_image_info(image):
     """
     
     ### START CODE HERE ###
-    ### TODO
+
+    height = image.shape[0]
+    width = image.shape[1]
+    dtype = image.dtype
+    
+    if (len(image.shape) == 3):
+        depth = image.shape[2]
+    else:
+        depth = 1 
+        
+    min_val = np.min(image)
+    max_val = np.max(image)
+    mean_val = np.mean(image)
+    std_val = np.std(image)
     ### END CODE HERE ###
+
 
     return {
         "width": width,

@@ -1,6 +1,7 @@
 import argparse
+import cv2
 import numpy as np
-import cv2 as cv
+import requests
 
 def load_image_from_url(url, **kwargs):
     """
@@ -15,9 +16,18 @@ def load_image_from_url(url, **kwargs):
     """
     
     ### START CODE HERE ###
-    ### TODO
+
+    response = requests.get(url)
+
+    if (response.status_code != 200):
+        print(f'Erro ao tentar carregar a imagem: {response.status_code}')
+        return None
+    else:
+        img_array = np.asarray(bytearray(response.content), dtype="uint8")
+        flags = kwargs.get('flags', cv2.IMREAD_COLOR)
+        image = cv2.imdecode(img_array, flags)
+
+
     ### END CODE HERE ###
     
     return image
-
-load_image_from_url()
